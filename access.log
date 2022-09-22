@@ -265,3 +265,4 @@
 ::1 - - [22/Sep/2022:16:34:28 +0000] "GET /css/product.css HTTP/1.1" 304 - "http://localhost:3000/admin/products" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 ::1 - - [22/Sep/2022:16:34:28 +0000] "GET /js/admin.js HTTP/1.1" 304 - "http://localhost:3000/admin/products" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 ::1 - - [22/Sep/2022:16:34:28 +0000] "GET /images/328943035-teddy.jpg HTTP/1.1" 200 13054 "http://localhost:3000/admin/products" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+::1 - - [22/Sep/2022:16:34:45 +0000] "DELETE /admin/product/632c8e930a449b86cb4d5fbf HTTP/1.1" 200 22 "http://localhost:3000/admin/products" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
