@@ -1,0 +1,43 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    </head>
+
+    <body>
+        <%- include('../partials/navbar.ejs') %>
+            <main>
+                <ul class="cart__item-list">
+                    <% products.forEach(p=> { %>
+                        <li class="cart__item">
+                            <h1>
+                                <%= p.productId.title %>
+                            </h1>
+                            <h2>Quantity: <%= p.quantity %>
+                            </h2>
+                        </li>
+                        <% }) %>
+                </ul>
+                <div class="centered">
+                    <h1>Total: ₹<%= totalSum %>
+                    </h1>
+                </div>
+                <div class="centered">
+                    <button id="order-btn" class="btn">Order Now!</button>
+                    <script src="https://js.stripe.com/v3/"></script>
+                    <script>
+                        var stripe = Stripe('pk_live_51K0kMiSHcvmTBks9fdCycCBGp8wOSN9xMcngzUz5ik0FiRVsBYUMZ6OlGe6vEN95BXGyMiWzzWzhzJP9uzB7Y2nq00L0OVAMKj');
+                        var checkoutButton = document.getElementById('order-btn');
+                        checkoutButton.addEventListener('click', function () {
+                            stripe.redirectToCheckout({
+                                sessionId: '<%= sessionId %>'
+                            }).then(function (result) {
+                                // If `redirectToCheckout` fails due to a browser or network
+                                // error, display the localized error message to your customer
+                                // using `result.error.message`.
+                                console.log(result.error.message);
+                            });
+                        });
+                    </script>
+                </div>
+
+            </main>
+            <%- include('../partials/footer.ejs') %>
