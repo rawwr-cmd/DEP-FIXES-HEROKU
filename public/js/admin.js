@@ -27,10 +27,12 @@ const deleteProduct = (btn) => {
     });
 };
 
-let button = document.querySelectorAll(".btn-danger");
+let button = document.querySelectorAll("button.btn");
 
-for (let i = 0; i < button.length; i++) {
-  button[i].addEventListener("click", () => {
-    deleteProduct.bind(null, button[i]);
+if (button.length > 0) {
+  button.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      deleteProduct(e.target);
+    });
   });
 }

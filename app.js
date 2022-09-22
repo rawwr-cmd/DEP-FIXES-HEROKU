@@ -65,7 +65,34 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 
-app.use(helmet());
+const scriptSrcUrls = ["https://js.stripe.com/v3/"];
+const styleSrcUrls = ["https://fonts.googleapis.com/"];
+const connectSrcUrls = [
+  "https://*.tiles.mapbox.com",
+  "https://api.mapbox.com",
+  "https://events.mapbox.com",
+  "https://res.cloudinary.com/dv5vm4sqh/",
+];
+const fontSrcUrls = ["https://fonts.gstatic.com"];
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: ["'self'", "blob:", "data:"],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      mediaSrc: ["https://res.cloudinary.com/dv5vm4sqh/"],
+      childSrc: ["blob:"],
+      frameSrc: ["blob:", "https://js.stripe.com/v3/"],
+    },
+  })
+);
+
 app.use(compression());
 app.use(morgan("combined", { stream: accessLogStream }));
 
