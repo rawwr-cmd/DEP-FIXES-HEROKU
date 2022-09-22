@@ -27,12 +27,12 @@ const deleteProduct = (btn) => {
     });
 };
 
-// let button = document.querySelectorAll("button.btn");
+let button = document.querySelectorAll("button.btn");
 
-// button.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     // console.log(e.target);
-//     // console.log(btn);
-//     deleteProduct(e.target);
-//   });
-// });
+button.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    // console.log(e.target);
+    // console.log(btn);
+    deleteProduct(e.target);
+  });
+});
