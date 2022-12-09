@@ -26,13 +26,3 @@ const deleteProduct = (btn) => {
       console.log(err);
     });
 };
-
-let button = document.querySelectorAll("button.btn");
-
-if (button.length > 0) {
-  button.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      deleteProduct(e.target);
-    });
-  });
-}

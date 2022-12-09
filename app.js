@@ -68,8 +68,6 @@ const accessLogStream = fs.createWriteStream(
 const scriptSrcUrls = ["https://js.stripe.com/v3/"];
 const styleSrcUrls = ["https://fonts.googleapis.com/"];
 const connectSrcUrls = [
-  "https://*.tiles.mapbox.com",
-  "https://api.mapbox.com",
   "https://events.mapbox.com",
   "https://res.cloudinary.com/dv5vm4sqh/",
 ];
@@ -77,11 +75,17 @@ const fontSrcUrls = ["https://fonts.gstatic.com"];
 
 app.use(
   helmet.contentSecurityPolicy({
+    useDefaults: false,
     directives: {
-      defaultSrc: [],
+      defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       connectSrc: ["'self'", ...connectSrcUrls],
-      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      scriptSrc: [
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        "'self'",
+        ...scriptSrcUrls,
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       objectSrc: [],
       imgSrc: ["'self'", "blob:", "data:"],
@@ -89,11 +93,12 @@ app.use(
       mediaSrc: ["https://res.cloudinary.com/dv5vm4sqh/"],
       childSrc: ["blob:"],
       frameSrc: ["blob:", "https://js.stripe.com/v3/"],
+      upgradeInsecureRequests: [],
     },
   })
 );
 
-app.use(compression());
+"https://api.mapbox.com", app.use(compression());
 app.use(morgan("combined", { stream: accessLogStream }));
 
 const sessionConfig = {
@@ -163,7 +168,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 mongoose
   .connect(process.env.DB_URL, {
